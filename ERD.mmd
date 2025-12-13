@@ -1,0 +1,39 @@
+erDiagram
+    USER ||--o{ STORE: has 
+    Product }o--o{ Category: has
+    STORE ||--o{ Product: has
+
+    USER{
+        id UUID
+        email string
+        password string 
+        avatar string
+        role string "ENUM(ADMIN , STOREOWNER , CUSTOMER)"
+        stores STORE[]
+
+        password_reset_token string
+        password_reset_token_expiry string
+        CreatedAt DateTime
+        UpdatedAt DateTime
+        PasswordUpdatedAt DateTime
+    }
+
+    Product{
+        id UUID
+        name string
+        description string
+        price number
+        categories Category[]
+    }
+
+    Category{
+        id UUID
+        name string
+    }
+
+    STORE{
+        id UUID
+        user_id UUID
+        products Product[]
+    }
+

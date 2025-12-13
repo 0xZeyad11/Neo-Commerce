@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: neo-commerce-db
+    restart: always
+    environment:
+      POSTGRES_USER: neocommerce_user
+      POSTGRES_PASSWORD: neocommerce_pass
+      POSTGRES_DB: neocommerce
+    ports:
+      - '5433:5432'
+    volumes:
+      - neocommerce_db_data:/var/lib/postgresql/data
+
+volumes:
+  neocommerce_db_data:

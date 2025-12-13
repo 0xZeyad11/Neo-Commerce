@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgres://neocommerce_user:neocommerce_pass@localhost:5433/neocommerce"
+}
+
+model User {
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String
+  avatar   String?
+  role     Role    @default(CUSTOMER)
+
+  password_reset_token        String?
+  password_reset_token_expiry DateTime?
+  password_updatedAt          DateTime?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+  stores    Store[]
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt()
+
+  store_id String
+  store    Store  @relation(fields: [store_id], references: [id])
+
+  productCategories ProductCategory[]
+  medias            Media[]
+
+  @@index([price])
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  productCategories ProductCategory[]
+}
+
+model ProductCategory {
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id])
+
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@id([category_id, product_id])
+  @@index([product_id])
+  @@index([category_id])
+}
+
+model Store {
+  id       String  @id @default(uuid())
+  name     String  @unique
+  about    String?
+  owner_id String
+  owner    User    @relation(fields: [owner_id], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+  products  Product[]
+}
+
+model Media {
+  id          String    @id @default(uuid())
+  type        MediaType @default(IMAGE)
+  description String?
+
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id])
+
+  @@index([product_id])
+}
+
+enum Role {
+  ADMIN
+  STORE_OWNER
+  CUSTOMER
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  PDF
+}
