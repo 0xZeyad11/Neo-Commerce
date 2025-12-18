@@ -16,7 +16,7 @@ export class UserService {
   }
 
   async getUserByID(id: string) {
-    return await this.prisma.user.findUnique({ where: { id } });
+    return await this.prisma.user.findUniqueOrThrow({ where: { id } });
   }
   async getUserByEmail(email: string): Promise<User | Partial<User>> {
     try {
@@ -36,5 +36,12 @@ export class UserService {
 
   async deleteUserByID(id: string) {
     await this.prisma.user.delete({ where: { id } });
+  }
+
+  async saveUserAvatar(id: string, imageURL: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { avatar: imageURL },
+    });
   }
 }

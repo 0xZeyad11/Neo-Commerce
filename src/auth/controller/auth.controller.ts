@@ -6,6 +6,7 @@ import {
   Post,
   Res,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CreateUserDTO } from 'src/user/dto/CreateUser.dto';
 import { AuthService } from '../service/auth.service';
@@ -82,9 +83,17 @@ export class AuthController {
     status: 200,
     description: 'Email sent to the user to click and then reset the password',
   })
-  @Post('reset-password')
-  async ResetPassword(@Body('email') email: string, @Req() req: Request) {
+  @Post('forgot-password')
+  async ForgotPassword(@Body('email') email: string, @Req() req: Request) {
     const url = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-    return await this.authservice.resetPassword(email, url);
+    return await this.authservice.forgotPassword(email, url);
+  }
+
+  @Post('reset-password')
+  async ResetPassword(
+    @Query('token') token: string,
+    @Body('password') password: string,
+  ) {
+    await this.authservice.resetPassword(token, password);
   }
 }

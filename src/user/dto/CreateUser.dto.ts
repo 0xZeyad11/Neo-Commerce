@@ -4,11 +4,13 @@ import {
   IsOptional,
   Matches,
   IsNotEmpty,
+  IsEnum,
   IsUrl,
   MinLength,
   MaxLength,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Role } from 'generated/client';
 
 export class CreateUserDTO {
   @ApiProperty({ example: 'johndoe@example.com' })
@@ -32,4 +34,8 @@ export class CreateUserDTO {
   @IsOptional()
   @IsUrl()
   avatar: string;
+
+  @IsOptional()
+  @IsEnum(Role)
+  role?: Role;
 }

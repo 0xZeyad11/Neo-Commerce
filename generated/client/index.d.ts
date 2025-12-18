@@ -39,6 +39,11 @@ export type ProductCategory = $Result.DefaultSelection<Prisma.$ProductCategoryPa
  */
 export type Store = $Result.DefaultSelection<Prisma.$StorePayload>
 /**
+ * Model StoreLinks
+ * 
+ */
+export type StoreLinks = $Result.DefaultSelection<Prisma.$StoreLinksPayload>
+/**
  * Model Media
  * 
  */
@@ -65,6 +70,18 @@ export const MediaType: {
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
 
+
+export const StoreLinkType: {
+  FACEBOOK: 'FACEBOOK',
+  INSTAGRAM: 'INSTAGRAM',
+  WHATSAPP: 'WHATSAPP',
+  TIKTOK: 'TIKTOK',
+  YOUTUBE: 'YOUTUBE',
+  GOOGLE_MAPS: 'GOOGLE_MAPS'
+};
+
+export type StoreLinkType = (typeof StoreLinkType)[keyof typeof StoreLinkType]
+
 }
 
 export type Role = $Enums.Role
@@ -74,6 +91,10 @@ export const Role: typeof $Enums.Role
 export type MediaType = $Enums.MediaType
 
 export const MediaType: typeof $Enums.MediaType
+
+export type StoreLinkType = $Enums.StoreLinkType
+
+export const StoreLinkType: typeof $Enums.StoreLinkType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -242,6 +263,16 @@ export class PrismaClient<
     * ```
     */
   get store(): Prisma.StoreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.storeLinks`: Exposes CRUD operations for the **StoreLinks** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StoreLinks
+    * const storeLinks = await prisma.storeLinks.findMany()
+    * ```
+    */
+  get storeLinks(): Prisma.StoreLinksDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.media`: Exposes CRUD operations for the **Media** model.
@@ -698,6 +729,7 @@ export namespace Prisma {
     Category: 'Category',
     ProductCategory: 'ProductCategory',
     Store: 'Store',
+    StoreLinks: 'StoreLinks',
     Media: 'Media'
   };
 
@@ -717,7 +749,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "product" | "category" | "productCategory" | "store" | "media"
+      modelProps: "user" | "product" | "category" | "productCategory" | "store" | "storeLinks" | "media"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1091,6 +1123,80 @@ export namespace Prisma {
           }
         }
       }
+      StoreLinks: {
+        payload: Prisma.$StoreLinksPayload<ExtArgs>
+        fields: Prisma.StoreLinksFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StoreLinksFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StoreLinksFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          findFirst: {
+            args: Prisma.StoreLinksFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StoreLinksFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          findMany: {
+            args: Prisma.StoreLinksFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>[]
+          }
+          create: {
+            args: Prisma.StoreLinksCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          createMany: {
+            args: Prisma.StoreLinksCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StoreLinksCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>[]
+          }
+          delete: {
+            args: Prisma.StoreLinksDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          update: {
+            args: Prisma.StoreLinksUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          deleteMany: {
+            args: Prisma.StoreLinksDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StoreLinksUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StoreLinksUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>[]
+          }
+          upsert: {
+            args: Prisma.StoreLinksUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StoreLinksPayload>
+          }
+          aggregate: {
+            args: Prisma.StoreLinksAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStoreLinks>
+          }
+          groupBy: {
+            args: Prisma.StoreLinksGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StoreLinksGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StoreLinksCountArgs<ExtArgs>
+            result: $Utils.Optional<StoreLinksCountAggregateOutputType> | number
+          }
+        }
+      }
       Media: {
         payload: Prisma.$MediaPayload<ExtArgs>
         fields: Prisma.MediaFieldRefs
@@ -1266,6 +1372,7 @@ export namespace Prisma {
     category?: CategoryOmit
     productCategory?: ProductCategoryOmit
     store?: StoreOmit
+    storeLinks?: StoreLinksOmit
     media?: MediaOmit
   }
 
@@ -1450,10 +1557,12 @@ export namespace Prisma {
 
   export type StoreCountOutputType = {
     products: number
+    storeLinks: number
   }
 
   export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | StoreCountOutputTypeCountProductsArgs
+    storeLinks?: boolean | StoreCountOutputTypeCountStoreLinksArgs
   }
 
   // Custom InputTypes
@@ -1472,6 +1581,13 @@ export namespace Prisma {
    */
   export type StoreCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountStoreLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoreLinksWhereInput
   }
 
 
@@ -5914,6 +6030,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     about: string | null
+    store_email: string | null
     owner_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5923,6 +6040,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     about: string | null
+    store_email: string | null
     owner_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -5932,6 +6050,7 @@ export namespace Prisma {
     id: number
     name: number
     about: number
+    store_email: number
     owner_id: number
     createdAt: number
     updatedAt: number
@@ -5943,6 +6062,7 @@ export namespace Prisma {
     id?: true
     name?: true
     about?: true
+    store_email?: true
     owner_id?: true
     createdAt?: true
     updatedAt?: true
@@ -5952,6 +6072,7 @@ export namespace Prisma {
     id?: true
     name?: true
     about?: true
+    store_email?: true
     owner_id?: true
     createdAt?: true
     updatedAt?: true
@@ -5961,6 +6082,7 @@ export namespace Prisma {
     id?: true
     name?: true
     about?: true
+    store_email?: true
     owner_id?: true
     createdAt?: true
     updatedAt?: true
@@ -6043,6 +6165,7 @@ export namespace Prisma {
     id: string
     name: string
     about: string | null
+    store_email: string | null
     owner_id: string
     createdAt: Date
     updatedAt: Date | null
@@ -6069,11 +6192,13 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     about?: boolean
+    store_email?: boolean
     owner_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
     products?: boolean | Store$productsArgs<ExtArgs>
+    storeLinks?: boolean | Store$storeLinksArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["store"]>
 
@@ -6081,6 +6206,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     about?: boolean
+    store_email?: boolean
     owner_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6091,6 +6217,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     about?: boolean
+    store_email?: boolean
     owner_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6101,15 +6228,17 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     about?: boolean
+    store_email?: boolean
     owner_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "owner_id" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
+  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "store_email" | "owner_id" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
     products?: boolean | Store$productsArgs<ExtArgs>
+    storeLinks?: boolean | Store$storeLinksArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6124,11 +6253,13 @@ export namespace Prisma {
     objects: {
       owner: Prisma.$UserPayload<ExtArgs>
       products: Prisma.$ProductPayload<ExtArgs>[]
+      storeLinks: Prisma.$StoreLinksPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       about: string | null
+      store_email: string | null
       owner_id: string
       createdAt: Date
       updatedAt: Date | null
@@ -6528,6 +6659,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     products<T extends Store$productsArgs<ExtArgs> = {}>(args?: Subset<T, Store$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    storeLinks<T extends Store$storeLinksArgs<ExtArgs> = {}>(args?: Subset<T, Store$storeLinksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6560,6 +6692,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Store", 'String'>
     readonly name: FieldRef<"Store", 'String'>
     readonly about: FieldRef<"Store", 'String'>
+    readonly store_email: FieldRef<"Store", 'String'>
     readonly owner_id: FieldRef<"Store", 'String'>
     readonly createdAt: FieldRef<"Store", 'DateTime'>
     readonly updatedAt: FieldRef<"Store", 'DateTime'>
@@ -6983,6 +7116,30 @@ export namespace Prisma {
   }
 
   /**
+   * Store.storeLinks
+   */
+  export type Store$storeLinksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    where?: StoreLinksWhereInput
+    orderBy?: StoreLinksOrderByWithRelationInput | StoreLinksOrderByWithRelationInput[]
+    cursor?: StoreLinksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StoreLinksScalarFieldEnum | StoreLinksScalarFieldEnum[]
+  }
+
+  /**
    * Store without action
    */
   export type StoreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6998,6 +7155,1038 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: StoreInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model StoreLinks
+   */
+
+  export type AggregateStoreLinks = {
+    _count: StoreLinksCountAggregateOutputType | null
+    _min: StoreLinksMinAggregateOutputType | null
+    _max: StoreLinksMaxAggregateOutputType | null
+  }
+
+  export type StoreLinksMinAggregateOutputType = {
+    id: string | null
+    link: string | null
+    store_id: string | null
+  }
+
+  export type StoreLinksMaxAggregateOutputType = {
+    id: string | null
+    link: string | null
+    store_id: string | null
+  }
+
+  export type StoreLinksCountAggregateOutputType = {
+    id: number
+    link: number
+    store_id: number
+    _all: number
+  }
+
+
+  export type StoreLinksMinAggregateInputType = {
+    id?: true
+    link?: true
+    store_id?: true
+  }
+
+  export type StoreLinksMaxAggregateInputType = {
+    id?: true
+    link?: true
+    store_id?: true
+  }
+
+  export type StoreLinksCountAggregateInputType = {
+    id?: true
+    link?: true
+    store_id?: true
+    _all?: true
+  }
+
+  export type StoreLinksAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoreLinks to aggregate.
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLinks to fetch.
+     */
+    orderBy?: StoreLinksOrderByWithRelationInput | StoreLinksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StoreLinksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StoreLinks
+    **/
+    _count?: true | StoreLinksCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StoreLinksMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StoreLinksMaxAggregateInputType
+  }
+
+  export type GetStoreLinksAggregateType<T extends StoreLinksAggregateArgs> = {
+        [P in keyof T & keyof AggregateStoreLinks]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStoreLinks[P]>
+      : GetScalarType<T[P], AggregateStoreLinks[P]>
+  }
+
+
+
+
+  export type StoreLinksGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StoreLinksWhereInput
+    orderBy?: StoreLinksOrderByWithAggregationInput | StoreLinksOrderByWithAggregationInput[]
+    by: StoreLinksScalarFieldEnum[] | StoreLinksScalarFieldEnum
+    having?: StoreLinksScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StoreLinksCountAggregateInputType | true
+    _min?: StoreLinksMinAggregateInputType
+    _max?: StoreLinksMaxAggregateInputType
+  }
+
+  export type StoreLinksGroupByOutputType = {
+    id: string
+    link: string
+    store_id: string
+    _count: StoreLinksCountAggregateOutputType | null
+    _min: StoreLinksMinAggregateOutputType | null
+    _max: StoreLinksMaxAggregateOutputType | null
+  }
+
+  type GetStoreLinksGroupByPayload<T extends StoreLinksGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StoreLinksGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StoreLinksGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StoreLinksGroupByOutputType[P]>
+            : GetScalarType<T[P], StoreLinksGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StoreLinksSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    link?: boolean
+    store_id?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storeLinks"]>
+
+  export type StoreLinksSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    link?: boolean
+    store_id?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storeLinks"]>
+
+  export type StoreLinksSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    link?: boolean
+    store_id?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["storeLinks"]>
+
+  export type StoreLinksSelectScalar = {
+    id?: boolean
+    link?: boolean
+    store_id?: boolean
+  }
+
+  export type StoreLinksOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "link" | "store_id", ExtArgs["result"]["storeLinks"]>
+  export type StoreLinksInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+  export type StoreLinksIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+  export type StoreLinksIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+
+  export type $StoreLinksPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StoreLinks"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      link: string
+      store_id: string
+    }, ExtArgs["result"]["storeLinks"]>
+    composites: {}
+  }
+
+  type StoreLinksGetPayload<S extends boolean | null | undefined | StoreLinksDefaultArgs> = $Result.GetResult<Prisma.$StoreLinksPayload, S>
+
+  type StoreLinksCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StoreLinksFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StoreLinksCountAggregateInputType | true
+    }
+
+  export interface StoreLinksDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StoreLinks'], meta: { name: 'StoreLinks' } }
+    /**
+     * Find zero or one StoreLinks that matches the filter.
+     * @param {StoreLinksFindUniqueArgs} args - Arguments to find a StoreLinks
+     * @example
+     * // Get one StoreLinks
+     * const storeLinks = await prisma.storeLinks.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StoreLinksFindUniqueArgs>(args: SelectSubset<T, StoreLinksFindUniqueArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StoreLinks that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StoreLinksFindUniqueOrThrowArgs} args - Arguments to find a StoreLinks
+     * @example
+     * // Get one StoreLinks
+     * const storeLinks = await prisma.storeLinks.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StoreLinksFindUniqueOrThrowArgs>(args: SelectSubset<T, StoreLinksFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StoreLinks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksFindFirstArgs} args - Arguments to find a StoreLinks
+     * @example
+     * // Get one StoreLinks
+     * const storeLinks = await prisma.storeLinks.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StoreLinksFindFirstArgs>(args?: SelectSubset<T, StoreLinksFindFirstArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StoreLinks that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksFindFirstOrThrowArgs} args - Arguments to find a StoreLinks
+     * @example
+     * // Get one StoreLinks
+     * const storeLinks = await prisma.storeLinks.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StoreLinksFindFirstOrThrowArgs>(args?: SelectSubset<T, StoreLinksFindFirstOrThrowArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StoreLinks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StoreLinks
+     * const storeLinks = await prisma.storeLinks.findMany()
+     * 
+     * // Get first 10 StoreLinks
+     * const storeLinks = await prisma.storeLinks.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const storeLinksWithIdOnly = await prisma.storeLinks.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StoreLinksFindManyArgs>(args?: SelectSubset<T, StoreLinksFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StoreLinks.
+     * @param {StoreLinksCreateArgs} args - Arguments to create a StoreLinks.
+     * @example
+     * // Create one StoreLinks
+     * const StoreLinks = await prisma.storeLinks.create({
+     *   data: {
+     *     // ... data to create a StoreLinks
+     *   }
+     * })
+     * 
+     */
+    create<T extends StoreLinksCreateArgs>(args: SelectSubset<T, StoreLinksCreateArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StoreLinks.
+     * @param {StoreLinksCreateManyArgs} args - Arguments to create many StoreLinks.
+     * @example
+     * // Create many StoreLinks
+     * const storeLinks = await prisma.storeLinks.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StoreLinksCreateManyArgs>(args?: SelectSubset<T, StoreLinksCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StoreLinks and returns the data saved in the database.
+     * @param {StoreLinksCreateManyAndReturnArgs} args - Arguments to create many StoreLinks.
+     * @example
+     * // Create many StoreLinks
+     * const storeLinks = await prisma.storeLinks.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StoreLinks and only return the `id`
+     * const storeLinksWithIdOnly = await prisma.storeLinks.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StoreLinksCreateManyAndReturnArgs>(args?: SelectSubset<T, StoreLinksCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StoreLinks.
+     * @param {StoreLinksDeleteArgs} args - Arguments to delete one StoreLinks.
+     * @example
+     * // Delete one StoreLinks
+     * const StoreLinks = await prisma.storeLinks.delete({
+     *   where: {
+     *     // ... filter to delete one StoreLinks
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StoreLinksDeleteArgs>(args: SelectSubset<T, StoreLinksDeleteArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StoreLinks.
+     * @param {StoreLinksUpdateArgs} args - Arguments to update one StoreLinks.
+     * @example
+     * // Update one StoreLinks
+     * const storeLinks = await prisma.storeLinks.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StoreLinksUpdateArgs>(args: SelectSubset<T, StoreLinksUpdateArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StoreLinks.
+     * @param {StoreLinksDeleteManyArgs} args - Arguments to filter StoreLinks to delete.
+     * @example
+     * // Delete a few StoreLinks
+     * const { count } = await prisma.storeLinks.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StoreLinksDeleteManyArgs>(args?: SelectSubset<T, StoreLinksDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoreLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StoreLinks
+     * const storeLinks = await prisma.storeLinks.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StoreLinksUpdateManyArgs>(args: SelectSubset<T, StoreLinksUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StoreLinks and returns the data updated in the database.
+     * @param {StoreLinksUpdateManyAndReturnArgs} args - Arguments to update many StoreLinks.
+     * @example
+     * // Update many StoreLinks
+     * const storeLinks = await prisma.storeLinks.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StoreLinks and only return the `id`
+     * const storeLinksWithIdOnly = await prisma.storeLinks.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StoreLinksUpdateManyAndReturnArgs>(args: SelectSubset<T, StoreLinksUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StoreLinks.
+     * @param {StoreLinksUpsertArgs} args - Arguments to update or create a StoreLinks.
+     * @example
+     * // Update or create a StoreLinks
+     * const storeLinks = await prisma.storeLinks.upsert({
+     *   create: {
+     *     // ... data to create a StoreLinks
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StoreLinks we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StoreLinksUpsertArgs>(args: SelectSubset<T, StoreLinksUpsertArgs<ExtArgs>>): Prisma__StoreLinksClient<$Result.GetResult<Prisma.$StoreLinksPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StoreLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksCountArgs} args - Arguments to filter StoreLinks to count.
+     * @example
+     * // Count the number of StoreLinks
+     * const count = await prisma.storeLinks.count({
+     *   where: {
+     *     // ... the filter for the StoreLinks we want to count
+     *   }
+     * })
+    **/
+    count<T extends StoreLinksCountArgs>(
+      args?: Subset<T, StoreLinksCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StoreLinksCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StoreLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StoreLinksAggregateArgs>(args: Subset<T, StoreLinksAggregateArgs>): Prisma.PrismaPromise<GetStoreLinksAggregateType<T>>
+
+    /**
+     * Group by StoreLinks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StoreLinksGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StoreLinksGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StoreLinksGroupByArgs['orderBy'] }
+        : { orderBy?: StoreLinksGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StoreLinksGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStoreLinksGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StoreLinks model
+   */
+  readonly fields: StoreLinksFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StoreLinks.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StoreLinksClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StoreLinks model
+   */
+  interface StoreLinksFieldRefs {
+    readonly id: FieldRef<"StoreLinks", 'String'>
+    readonly link: FieldRef<"StoreLinks", 'String'>
+    readonly store_id: FieldRef<"StoreLinks", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StoreLinks findUnique
+   */
+  export type StoreLinksFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter, which StoreLinks to fetch.
+     */
+    where: StoreLinksWhereUniqueInput
+  }
+
+  /**
+   * StoreLinks findUniqueOrThrow
+   */
+  export type StoreLinksFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter, which StoreLinks to fetch.
+     */
+    where: StoreLinksWhereUniqueInput
+  }
+
+  /**
+   * StoreLinks findFirst
+   */
+  export type StoreLinksFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter, which StoreLinks to fetch.
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLinks to fetch.
+     */
+    orderBy?: StoreLinksOrderByWithRelationInput | StoreLinksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoreLinks.
+     */
+    cursor?: StoreLinksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoreLinks.
+     */
+    distinct?: StoreLinksScalarFieldEnum | StoreLinksScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLinks findFirstOrThrow
+   */
+  export type StoreLinksFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter, which StoreLinks to fetch.
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLinks to fetch.
+     */
+    orderBy?: StoreLinksOrderByWithRelationInput | StoreLinksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StoreLinks.
+     */
+    cursor?: StoreLinksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLinks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StoreLinks.
+     */
+    distinct?: StoreLinksScalarFieldEnum | StoreLinksScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLinks findMany
+   */
+  export type StoreLinksFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter, which StoreLinks to fetch.
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StoreLinks to fetch.
+     */
+    orderBy?: StoreLinksOrderByWithRelationInput | StoreLinksOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StoreLinks.
+     */
+    cursor?: StoreLinksWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StoreLinks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StoreLinks.
+     */
+    skip?: number
+    distinct?: StoreLinksScalarFieldEnum | StoreLinksScalarFieldEnum[]
+  }
+
+  /**
+   * StoreLinks create
+   */
+  export type StoreLinksCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StoreLinks.
+     */
+    data: XOR<StoreLinksCreateInput, StoreLinksUncheckedCreateInput>
+  }
+
+  /**
+   * StoreLinks createMany
+   */
+  export type StoreLinksCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StoreLinks.
+     */
+    data: StoreLinksCreateManyInput | StoreLinksCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StoreLinks createManyAndReturn
+   */
+  export type StoreLinksCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * The data used to create many StoreLinks.
+     */
+    data: StoreLinksCreateManyInput | StoreLinksCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StoreLinks update
+   */
+  export type StoreLinksUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StoreLinks.
+     */
+    data: XOR<StoreLinksUpdateInput, StoreLinksUncheckedUpdateInput>
+    /**
+     * Choose, which StoreLinks to update.
+     */
+    where: StoreLinksWhereUniqueInput
+  }
+
+  /**
+   * StoreLinks updateMany
+   */
+  export type StoreLinksUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StoreLinks.
+     */
+    data: XOR<StoreLinksUpdateManyMutationInput, StoreLinksUncheckedUpdateManyInput>
+    /**
+     * Filter which StoreLinks to update
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * Limit how many StoreLinks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StoreLinks updateManyAndReturn
+   */
+  export type StoreLinksUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * The data used to update StoreLinks.
+     */
+    data: XOR<StoreLinksUpdateManyMutationInput, StoreLinksUncheckedUpdateManyInput>
+    /**
+     * Filter which StoreLinks to update
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * Limit how many StoreLinks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StoreLinks upsert
+   */
+  export type StoreLinksUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StoreLinks to update in case it exists.
+     */
+    where: StoreLinksWhereUniqueInput
+    /**
+     * In case the StoreLinks found by the `where` argument doesn't exist, create a new StoreLinks with this data.
+     */
+    create: XOR<StoreLinksCreateInput, StoreLinksUncheckedCreateInput>
+    /**
+     * In case the StoreLinks was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StoreLinksUpdateInput, StoreLinksUncheckedUpdateInput>
+  }
+
+  /**
+   * StoreLinks delete
+   */
+  export type StoreLinksDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
+    /**
+     * Filter which StoreLinks to delete.
+     */
+    where: StoreLinksWhereUniqueInput
+  }
+
+  /**
+   * StoreLinks deleteMany
+   */
+  export type StoreLinksDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StoreLinks to delete
+     */
+    where?: StoreLinksWhereInput
+    /**
+     * Limit how many StoreLinks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StoreLinks without action
+   */
+  export type StoreLinksDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StoreLinks
+     */
+    select?: StoreLinksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StoreLinks
+     */
+    omit?: StoreLinksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StoreLinksInclude<ExtArgs> | null
   }
 
 
@@ -8113,12 +9302,22 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     about: 'about',
+    store_email: 'store_email',
     owner_id: 'owner_id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type StoreScalarFieldEnum = (typeof StoreScalarFieldEnum)[keyof typeof StoreScalarFieldEnum]
+
+
+  export const StoreLinksScalarFieldEnum: {
+    id: 'id',
+    link: 'link',
+    store_id: 'store_id'
+  };
+
+  export type StoreLinksScalarFieldEnum = (typeof StoreLinksScalarFieldEnum)[keyof typeof StoreLinksScalarFieldEnum]
 
 
   export const MediaScalarFieldEnum: {
@@ -8511,22 +9710,26 @@ export namespace Prisma {
     id?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
     about?: StringNullableFilter<"Store"> | string | null
+    store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Store"> | Date | string | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     products?: ProductListRelationFilter
+    storeLinks?: StoreLinksListRelationFilter
   }
 
   export type StoreOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     about?: SortOrderInput | SortOrder
+    store_email?: SortOrderInput | SortOrder
     owner_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
     owner?: UserOrderByWithRelationInput
     products?: ProductOrderByRelationAggregateInput
+    storeLinks?: StoreLinksOrderByRelationAggregateInput
   }
 
   export type StoreWhereUniqueInput = Prisma.AtLeast<{
@@ -8536,17 +9739,20 @@ export namespace Prisma {
     OR?: StoreWhereInput[]
     NOT?: StoreWhereInput | StoreWhereInput[]
     about?: StringNullableFilter<"Store"> | string | null
+    store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Store"> | Date | string | null
     owner?: XOR<UserScalarRelationFilter, UserWhereInput>
     products?: ProductListRelationFilter
+    storeLinks?: StoreLinksListRelationFilter
   }, "id" | "name">
 
   export type StoreOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     about?: SortOrderInput | SortOrder
+    store_email?: SortOrderInput | SortOrder
     owner_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
@@ -8562,9 +9768,55 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Store"> | string
     name?: StringWithAggregatesFilter<"Store"> | string
     about?: StringNullableWithAggregatesFilter<"Store"> | string | null
+    store_email?: StringNullableWithAggregatesFilter<"Store"> | string | null
     owner_id?: StringWithAggregatesFilter<"Store"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Store"> | Date | string
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Store"> | Date | string | null
+  }
+
+  export type StoreLinksWhereInput = {
+    AND?: StoreLinksWhereInput | StoreLinksWhereInput[]
+    OR?: StoreLinksWhereInput[]
+    NOT?: StoreLinksWhereInput | StoreLinksWhereInput[]
+    id?: StringFilter<"StoreLinks"> | string
+    link?: StringFilter<"StoreLinks"> | string
+    store_id?: StringFilter<"StoreLinks"> | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }
+
+  export type StoreLinksOrderByWithRelationInput = {
+    id?: SortOrder
+    link?: SortOrder
+    store_id?: SortOrder
+    store?: StoreOrderByWithRelationInput
+  }
+
+  export type StoreLinksWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    link?: string
+    AND?: StoreLinksWhereInput | StoreLinksWhereInput[]
+    OR?: StoreLinksWhereInput[]
+    NOT?: StoreLinksWhereInput | StoreLinksWhereInput[]
+    store_id?: StringFilter<"StoreLinks"> | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }, "id" | "link">
+
+  export type StoreLinksOrderByWithAggregationInput = {
+    id?: SortOrder
+    link?: SortOrder
+    store_id?: SortOrder
+    _count?: StoreLinksCountOrderByAggregateInput
+    _max?: StoreLinksMaxOrderByAggregateInput
+    _min?: StoreLinksMinOrderByAggregateInput
+  }
+
+  export type StoreLinksScalarWhereWithAggregatesInput = {
+    AND?: StoreLinksScalarWhereWithAggregatesInput | StoreLinksScalarWhereWithAggregatesInput[]
+    OR?: StoreLinksScalarWhereWithAggregatesInput[]
+    NOT?: StoreLinksScalarWhereWithAggregatesInput | StoreLinksScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StoreLinks"> | string
+    link?: StringWithAggregatesFilter<"StoreLinks"> | string
+    store_id?: StringWithAggregatesFilter<"StoreLinks"> | string
   }
 
   export type MediaWhereInput = {
@@ -8893,46 +10145,55 @@ export namespace Prisma {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
     owner: UserCreateNestedOneWithoutStoresInput
     products?: ProductCreateNestedManyWithoutStoreInput
+    storeLinks?: StoreLinksCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateInput = {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     owner_id: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
     products?: ProductUncheckedCreateNestedManyWithoutStoreInput
+    storeLinks?: StoreLinksUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     owner?: UserUpdateOneRequiredWithoutStoresNestedInput
     products?: ProductUpdateManyWithoutStoreNestedInput
+    storeLinks?: StoreLinksUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
+    storeLinks?: StoreLinksUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateManyInput = {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     owner_id: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -8942,6 +10203,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -8950,9 +10212,51 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StoreLinksCreateInput = {
+    id?: string
+    link: string
+    store: StoreCreateNestedOneWithoutStoreLinksInput
+  }
+
+  export type StoreLinksUncheckedCreateInput = {
+    id?: string
+    link: string
+    store_id: string
+  }
+
+  export type StoreLinksUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    store?: StoreUpdateOneRequiredWithoutStoreLinksNestedInput
+  }
+
+  export type StoreLinksUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    store_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoreLinksCreateManyInput = {
+    id?: string
+    link: string
+    store_id: string
+  }
+
+  export type StoreLinksUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoreLinksUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+    store_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type MediaCreateInput = {
@@ -9348,7 +10652,17 @@ export namespace Prisma {
     none?: ProductWhereInput
   }
 
+  export type StoreLinksListRelationFilter = {
+    every?: StoreLinksWhereInput
+    some?: StoreLinksWhereInput
+    none?: StoreLinksWhereInput
+  }
+
   export type ProductOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StoreLinksOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9356,6 +10670,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     about?: SortOrder
+    store_email?: SortOrder
     owner_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9365,6 +10680,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     about?: SortOrder
+    store_email?: SortOrder
     owner_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -9374,9 +10690,28 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     about?: SortOrder
+    store_email?: SortOrder
     owner_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StoreLinksCountOrderByAggregateInput = {
+    id?: SortOrder
+    link?: SortOrder
+    store_id?: SortOrder
+  }
+
+  export type StoreLinksMaxOrderByAggregateInput = {
+    id?: SortOrder
+    link?: SortOrder
+    store_id?: SortOrder
+  }
+
+  export type StoreLinksMinOrderByAggregateInput = {
+    id?: SortOrder
+    link?: SortOrder
+    store_id?: SortOrder
   }
 
   export type EnumMediaTypeFilter<$PrismaModel = never> = {
@@ -9668,11 +11003,25 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type StoreLinksCreateNestedManyWithoutStoreInput = {
+    create?: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput> | StoreLinksCreateWithoutStoreInput[] | StoreLinksUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StoreLinksCreateOrConnectWithoutStoreInput | StoreLinksCreateOrConnectWithoutStoreInput[]
+    createMany?: StoreLinksCreateManyStoreInputEnvelope
+    connect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+  }
+
   export type ProductUncheckedCreateNestedManyWithoutStoreInput = {
     create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
     createMany?: ProductCreateManyStoreInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type StoreLinksUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput> | StoreLinksCreateWithoutStoreInput[] | StoreLinksUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StoreLinksCreateOrConnectWithoutStoreInput | StoreLinksCreateOrConnectWithoutStoreInput[]
+    createMany?: StoreLinksCreateManyStoreInputEnvelope
+    connect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutStoresNestedInput = {
@@ -9697,6 +11046,20 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type StoreLinksUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput> | StoreLinksCreateWithoutStoreInput[] | StoreLinksUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StoreLinksCreateOrConnectWithoutStoreInput | StoreLinksCreateOrConnectWithoutStoreInput[]
+    upsert?: StoreLinksUpsertWithWhereUniqueWithoutStoreInput | StoreLinksUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: StoreLinksCreateManyStoreInputEnvelope
+    set?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    disconnect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    delete?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    connect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    update?: StoreLinksUpdateWithWhereUniqueWithoutStoreInput | StoreLinksUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: StoreLinksUpdateManyWithWhereWithoutStoreInput | StoreLinksUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: StoreLinksScalarWhereInput | StoreLinksScalarWhereInput[]
+  }
+
   export type ProductUncheckedUpdateManyWithoutStoreNestedInput = {
     create?: XOR<ProductCreateWithoutStoreInput, ProductUncheckedCreateWithoutStoreInput> | ProductCreateWithoutStoreInput[] | ProductUncheckedCreateWithoutStoreInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutStoreInput | ProductCreateOrConnectWithoutStoreInput[]
@@ -9709,6 +11072,34 @@ export namespace Prisma {
     update?: ProductUpdateWithWhereUniqueWithoutStoreInput | ProductUpdateWithWhereUniqueWithoutStoreInput[]
     updateMany?: ProductUpdateManyWithWhereWithoutStoreInput | ProductUpdateManyWithWhereWithoutStoreInput[]
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type StoreLinksUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput> | StoreLinksCreateWithoutStoreInput[] | StoreLinksUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: StoreLinksCreateOrConnectWithoutStoreInput | StoreLinksCreateOrConnectWithoutStoreInput[]
+    upsert?: StoreLinksUpsertWithWhereUniqueWithoutStoreInput | StoreLinksUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: StoreLinksCreateManyStoreInputEnvelope
+    set?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    disconnect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    delete?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    connect?: StoreLinksWhereUniqueInput | StoreLinksWhereUniqueInput[]
+    update?: StoreLinksUpdateWithWhereUniqueWithoutStoreInput | StoreLinksUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: StoreLinksUpdateManyWithWhereWithoutStoreInput | StoreLinksUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: StoreLinksScalarWhereInput | StoreLinksScalarWhereInput[]
+  }
+
+  export type StoreCreateNestedOneWithoutStoreLinksInput = {
+    create?: XOR<StoreCreateWithoutStoreLinksInput, StoreUncheckedCreateWithoutStoreLinksInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutStoreLinksInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type StoreUpdateOneRequiredWithoutStoreLinksNestedInput = {
+    create?: XOR<StoreCreateWithoutStoreLinksInput, StoreUncheckedCreateWithoutStoreLinksInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutStoreLinksInput
+    upsert?: StoreUpsertWithoutStoreLinksInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutStoreLinksInput, StoreUpdateWithoutStoreLinksInput>, StoreUncheckedUpdateWithoutStoreLinksInput>
   }
 
   export type ProductCreateNestedOneWithoutMediasInput = {
@@ -9928,18 +11319,22 @@ export namespace Prisma {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
     products?: ProductCreateNestedManyWithoutStoreInput
+    storeLinks?: StoreLinksCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutOwnerInput = {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
     products?: ProductUncheckedCreateNestedManyWithoutStoreInput
+    storeLinks?: StoreLinksUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutOwnerInput = {
@@ -9975,6 +11370,7 @@ export namespace Prisma {
     id?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
     about?: StringNullableFilter<"Store"> | string | null
+    store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Store"> | Date | string | null
@@ -9984,18 +11380,22 @@ export namespace Prisma {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
     owner: UserCreateNestedOneWithoutStoresInput
+    storeLinks?: StoreLinksCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutProductsInput = {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     owner_id: string
     createdAt?: Date | string
     updatedAt?: Date | string | null
+    storeLinks?: StoreLinksUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutProductsInput = {
@@ -10062,18 +11462,22 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     owner?: UserUpdateOneRequiredWithoutStoresNestedInput
+    storeLinks?: StoreLinksUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    storeLinks?: StoreLinksUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type ProductCategoryUpsertWithWhereUniqueWithoutProductInput = {
@@ -10333,6 +11737,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type StoreLinksCreateWithoutStoreInput = {
+    id?: string
+    link: string
+  }
+
+  export type StoreLinksUncheckedCreateWithoutStoreInput = {
+    id?: string
+    link: string
+  }
+
+  export type StoreLinksCreateOrConnectWithoutStoreInput = {
+    where: StoreLinksWhereUniqueInput
+    create: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput>
+  }
+
+  export type StoreLinksCreateManyStoreInputEnvelope = {
+    data: StoreLinksCreateManyStoreInput | StoreLinksCreateManyStoreInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutStoresInput = {
     update: XOR<UserUpdateWithoutStoresInput, UserUncheckedUpdateWithoutStoresInput>
     create: XOR<UserCreateWithoutStoresInput, UserUncheckedCreateWithoutStoresInput>
@@ -10399,6 +11823,91 @@ export namespace Prisma {
     store_id?: StringFilter<"Product"> | string
   }
 
+  export type StoreLinksUpsertWithWhereUniqueWithoutStoreInput = {
+    where: StoreLinksWhereUniqueInput
+    update: XOR<StoreLinksUpdateWithoutStoreInput, StoreLinksUncheckedUpdateWithoutStoreInput>
+    create: XOR<StoreLinksCreateWithoutStoreInput, StoreLinksUncheckedCreateWithoutStoreInput>
+  }
+
+  export type StoreLinksUpdateWithWhereUniqueWithoutStoreInput = {
+    where: StoreLinksWhereUniqueInput
+    data: XOR<StoreLinksUpdateWithoutStoreInput, StoreLinksUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type StoreLinksUpdateManyWithWhereWithoutStoreInput = {
+    where: StoreLinksScalarWhereInput
+    data: XOR<StoreLinksUpdateManyMutationInput, StoreLinksUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type StoreLinksScalarWhereInput = {
+    AND?: StoreLinksScalarWhereInput | StoreLinksScalarWhereInput[]
+    OR?: StoreLinksScalarWhereInput[]
+    NOT?: StoreLinksScalarWhereInput | StoreLinksScalarWhereInput[]
+    id?: StringFilter<"StoreLinks"> | string
+    link?: StringFilter<"StoreLinks"> | string
+    store_id?: StringFilter<"StoreLinks"> | string
+  }
+
+  export type StoreCreateWithoutStoreLinksInput = {
+    id?: string
+    name: string
+    about?: string | null
+    store_email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    owner: UserCreateNestedOneWithoutStoresInput
+    products?: ProductCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreUncheckedCreateWithoutStoreLinksInput = {
+    id?: string
+    name: string
+    about?: string | null
+    store_email?: string | null
+    owner_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string | null
+    products?: ProductUncheckedCreateNestedManyWithoutStoreInput
+  }
+
+  export type StoreCreateOrConnectWithoutStoreLinksInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutStoreLinksInput, StoreUncheckedCreateWithoutStoreLinksInput>
+  }
+
+  export type StoreUpsertWithoutStoreLinksInput = {
+    update: XOR<StoreUpdateWithoutStoreLinksInput, StoreUncheckedUpdateWithoutStoreLinksInput>
+    create: XOR<StoreCreateWithoutStoreLinksInput, StoreUncheckedCreateWithoutStoreLinksInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutStoreLinksInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutStoreLinksInput, StoreUncheckedUpdateWithoutStoreLinksInput>
+  }
+
+  export type StoreUpdateWithoutStoreLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    owner?: UserUpdateOneRequiredWithoutStoresNestedInput
+    products?: ProductUpdateManyWithoutStoreNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutStoreLinksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
+    owner_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
+  }
+
   export type ProductCreateWithoutMediasInput = {
     id?: string
     name: string
@@ -10463,6 +11972,7 @@ export namespace Prisma {
     id?: string
     name: string
     about?: string | null
+    store_email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
   }
@@ -10471,24 +11981,29 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     products?: ProductUpdateManyWithoutStoreNestedInput
+    storeLinks?: StoreLinksUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     products?: ProductUncheckedUpdateManyWithoutStoreNestedInput
+    storeLinks?: StoreLinksUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateManyWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
+    store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -10574,6 +12089,11 @@ export namespace Prisma {
     updatedAt?: Date | string | null
   }
 
+  export type StoreLinksCreateManyStoreInput = {
+    id?: string
+    link: string
+  }
+
   export type ProductUpdateWithoutStoreInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -10603,6 +12123,21 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StoreLinksUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoreLinksUncheckedUpdateWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type StoreLinksUncheckedUpdateManyWithoutStoreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    link?: StringFieldUpdateOperationsInput | string
   }
 
 

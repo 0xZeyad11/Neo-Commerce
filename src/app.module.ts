@@ -12,6 +12,11 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaFilterModule } from './common/filters/PrismaFilter/prisma-filter.module';
 import { MailModule } from './mail/module/mail.module';
 import { MailService } from './mail/service/mail.service';
+import { MediaModule } from './media/module/media.module';
+import { MediaService } from './media/service/media.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { StoreModule } from './store/module/store.module';
 
 @Module({
   imports: [
@@ -23,9 +28,15 @@ import { MailService } from './mail/service/mail.service';
       isGlobal: true,
       envFilePath: ['local.env'],
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads/public'),
+      serveRoot: '/uploads/public',
+    }),
     PrismaFilterModule,
+    MediaModule,
+    StoreModule,
   ],
   controllers: [AppController, UserController, AuthController],
-  providers: [AppService, UserService, AuthService, MailService],
+  providers: [AppService, UserService, AuthService, MailService, MediaService],
 })
 export class AppModule {}

@@ -162,9 +162,16 @@ exports.Prisma.StoreScalarFieldEnum = {
   id: 'id',
   name: 'name',
   about: 'about',
+  store_email: 'store_email',
   owner_id: 'owner_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StoreLinksScalarFieldEnum = {
+  id: 'id',
+  link: 'link',
+  store_id: 'store_id'
 };
 
 exports.Prisma.MediaScalarFieldEnum = {
@@ -206,6 +213,7 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   ProductCategory: 'ProductCategory',
   Store: 'Store',
+  StoreLinks: 'StoreLinks',
   Media: 'Media'
 };
 
