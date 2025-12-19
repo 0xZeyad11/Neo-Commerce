@@ -75,6 +75,7 @@ model ProductCategory {
 model Store {
   id          String  @id @default(uuid())
   name        String  @unique
+  logo        String?
   about       String?
   store_email String?
   owner_id    String
@@ -113,7 +114,6 @@ enum Role {
 enum MediaType {
   IMAGE
   VIDEO
-  PDF
 }
 
 enum StoreLinkType {

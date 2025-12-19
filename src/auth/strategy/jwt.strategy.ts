@@ -40,6 +40,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         "This user doesn't exist, please make sure to make an account",
       );
     }
+    console.log('this is the user returned from the authentication ==> ', user);
     return user;
   }
 }

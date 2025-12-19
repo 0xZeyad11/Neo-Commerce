@@ -161,6 +161,7 @@ exports.Prisma.ProductCategoryScalarFieldEnum = {
 exports.Prisma.StoreScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  logo: 'logo',
   about: 'about',
   store_email: 'store_email',
   owner_id: 'owner_id',
@@ -203,8 +204,7 @@ exports.Role = exports.$Enums.Role = {
 
 exports.MediaType = exports.$Enums.MediaType = {
   IMAGE: 'IMAGE',
-  VIDEO: 'VIDEO',
-  PDF: 'PDF'
+  VIDEO: 'VIDEO'
 };
 
 exports.Prisma.ModelName = {
