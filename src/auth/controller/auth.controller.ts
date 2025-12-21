@@ -15,6 +15,7 @@ import { UpdateUserDTO } from 'src/user/dto/UpdateUser.dto';
 import type { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { JwtAuthGuard } from 'src/common/guards/jwtauth.guard';
+import { Public } from 'src/common/decorators/public.decorator';
 
 const maxTokenAge = 24 * 3600;
 @ApiTags('Authentication')
@@ -27,6 +28,7 @@ export class AuthController {
 
   @ApiOperation({ description: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'Created a new user!' })
+  @Public()
   @Post('signup')
   async Signup(
     @Body() user: CreateUserDTO,
@@ -44,6 +46,7 @@ export class AuthController {
 
   @ApiOperation({ description: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'Created a new user!' })
+  @Public()
   @Post('login')
   async login(
     @Body() user: UpdateUserDTO,
@@ -72,7 +75,6 @@ export class AuthController {
     status: 200,
     description: 'Current user data found',
   })
-  @UseGuards(JwtAuthGuard)
   @Get('me')
   async GetMe(@Req() req: Request) {
     return req.user;

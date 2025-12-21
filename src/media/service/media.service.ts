@@ -24,6 +24,18 @@ export class MediaService {
     return `/uploads/public/users/${filename}`;
   }
 
+  async saveStoreLogo(file: Express.Multer.File) {
+    if (!file) throw new BadRequestException('No files provided!');
+    const outputDir = join(process.cwd(), '/uploads/public/stores');
+    await this.ensureDir(outputDir);
+
+    const processed = await ProcessImage(file.buffer, 256, 256);
+    const filename = `${randomUUID()}.webp`;
+    const filepath = join(outputDir, filename);
+    await writeFile(filepath, processed);
+    return `/uploads/public/stores/${filename}`;
+  }
+
   async saveProductMedia(files: Express.Multer.File[]) {
     if (!files || files.length === 0) {
       throw new BadRequestException('No files provided');

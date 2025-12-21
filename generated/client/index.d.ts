@@ -64,8 +64,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const MediaType: {
   IMAGE: 'IMAGE',
-  VIDEO: 'VIDEO',
-  PDF: 'PDF'
+  VIDEO: 'VIDEO'
 };
 
 export type MediaType = (typeof MediaType)[keyof typeof MediaType]
@@ -6029,6 +6028,7 @@ export namespace Prisma {
   export type StoreMinAggregateOutputType = {
     id: string | null
     name: string | null
+    logo: string | null
     about: string | null
     store_email: string | null
     owner_id: string | null
@@ -6039,6 +6039,7 @@ export namespace Prisma {
   export type StoreMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    logo: string | null
     about: string | null
     store_email: string | null
     owner_id: string | null
@@ -6049,6 +6050,7 @@ export namespace Prisma {
   export type StoreCountAggregateOutputType = {
     id: number
     name: number
+    logo: number
     about: number
     store_email: number
     owner_id: number
@@ -6061,6 +6063,7 @@ export namespace Prisma {
   export type StoreMinAggregateInputType = {
     id?: true
     name?: true
+    logo?: true
     about?: true
     store_email?: true
     owner_id?: true
@@ -6071,6 +6074,7 @@ export namespace Prisma {
   export type StoreMaxAggregateInputType = {
     id?: true
     name?: true
+    logo?: true
     about?: true
     store_email?: true
     owner_id?: true
@@ -6081,6 +6085,7 @@ export namespace Prisma {
   export type StoreCountAggregateInputType = {
     id?: true
     name?: true
+    logo?: true
     about?: true
     store_email?: true
     owner_id?: true
@@ -6164,6 +6169,7 @@ export namespace Prisma {
   export type StoreGroupByOutputType = {
     id: string
     name: string
+    logo: string | null
     about: string | null
     store_email: string | null
     owner_id: string
@@ -6191,6 +6197,7 @@ export namespace Prisma {
   export type StoreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    logo?: boolean
     about?: boolean
     store_email?: boolean
     owner_id?: boolean
@@ -6205,6 +6212,7 @@ export namespace Prisma {
   export type StoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    logo?: boolean
     about?: boolean
     store_email?: boolean
     owner_id?: boolean
@@ -6216,6 +6224,7 @@ export namespace Prisma {
   export type StoreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    logo?: boolean
     about?: boolean
     store_email?: boolean
     owner_id?: boolean
@@ -6227,6 +6236,7 @@ export namespace Prisma {
   export type StoreSelectScalar = {
     id?: boolean
     name?: boolean
+    logo?: boolean
     about?: boolean
     store_email?: boolean
     owner_id?: boolean
@@ -6234,7 +6244,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "about" | "store_email" | "owner_id" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
+  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "logo" | "about" | "store_email" | "owner_id" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
     products?: boolean | Store$productsArgs<ExtArgs>
@@ -6258,6 +6268,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      logo: string | null
       about: string | null
       store_email: string | null
       owner_id: string
@@ -6691,6 +6702,7 @@ export namespace Prisma {
   interface StoreFieldRefs {
     readonly id: FieldRef<"Store", 'String'>
     readonly name: FieldRef<"Store", 'String'>
+    readonly logo: FieldRef<"Store", 'String'>
     readonly about: FieldRef<"Store", 'String'>
     readonly store_email: FieldRef<"Store", 'String'>
     readonly owner_id: FieldRef<"Store", 'String'>
@@ -9301,6 +9313,7 @@ export namespace Prisma {
   export const StoreScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    logo: 'logo',
     about: 'about',
     store_email: 'store_email',
     owner_id: 'owner_id',
@@ -9709,6 +9722,7 @@ export namespace Prisma {
     NOT?: StoreWhereInput | StoreWhereInput[]
     id?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
+    logo?: StringNullableFilter<"Store"> | string | null
     about?: StringNullableFilter<"Store"> | string | null
     store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
@@ -9722,6 +9736,7 @@ export namespace Prisma {
   export type StoreOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    logo?: SortOrderInput | SortOrder
     about?: SortOrderInput | SortOrder
     store_email?: SortOrderInput | SortOrder
     owner_id?: SortOrder
@@ -9738,6 +9753,7 @@ export namespace Prisma {
     AND?: StoreWhereInput | StoreWhereInput[]
     OR?: StoreWhereInput[]
     NOT?: StoreWhereInput | StoreWhereInput[]
+    logo?: StringNullableFilter<"Store"> | string | null
     about?: StringNullableFilter<"Store"> | string | null
     store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
@@ -9751,6 +9767,7 @@ export namespace Prisma {
   export type StoreOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    logo?: SortOrderInput | SortOrder
     about?: SortOrderInput | SortOrder
     store_email?: SortOrderInput | SortOrder
     owner_id?: SortOrder
@@ -9767,6 +9784,7 @@ export namespace Prisma {
     NOT?: StoreScalarWhereWithAggregatesInput | StoreScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Store"> | string
     name?: StringWithAggregatesFilter<"Store"> | string
+    logo?: StringNullableWithAggregatesFilter<"Store"> | string | null
     about?: StringNullableWithAggregatesFilter<"Store"> | string | null
     store_email?: StringNullableWithAggregatesFilter<"Store"> | string | null
     owner_id?: StringWithAggregatesFilter<"Store"> | string
@@ -10144,6 +10162,7 @@ export namespace Prisma {
   export type StoreCreateInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -10156,6 +10175,7 @@ export namespace Prisma {
   export type StoreUncheckedCreateInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     owner_id: string
@@ -10168,6 +10188,7 @@ export namespace Prisma {
   export type StoreUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10180,6 +10201,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
@@ -10192,6 +10214,7 @@ export namespace Prisma {
   export type StoreCreateManyInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     owner_id: string
@@ -10202,6 +10225,7 @@ export namespace Prisma {
   export type StoreUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10211,6 +10235,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
@@ -10669,6 +10694,7 @@ export namespace Prisma {
   export type StoreCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     about?: SortOrder
     store_email?: SortOrder
     owner_id?: SortOrder
@@ -10679,6 +10705,7 @@ export namespace Prisma {
   export type StoreMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     about?: SortOrder
     store_email?: SortOrder
     owner_id?: SortOrder
@@ -10689,6 +10716,7 @@ export namespace Prisma {
   export type StoreMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    logo?: SortOrder
     about?: SortOrder
     store_email?: SortOrder
     owner_id?: SortOrder
@@ -11318,6 +11346,7 @@ export namespace Prisma {
   export type StoreCreateWithoutOwnerInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -11329,6 +11358,7 @@ export namespace Prisma {
   export type StoreUncheckedCreateWithoutOwnerInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -11369,6 +11399,7 @@ export namespace Prisma {
     NOT?: StoreScalarWhereInput | StoreScalarWhereInput[]
     id?: StringFilter<"Store"> | string
     name?: StringFilter<"Store"> | string
+    logo?: StringNullableFilter<"Store"> | string | null
     about?: StringNullableFilter<"Store"> | string | null
     store_email?: StringNullableFilter<"Store"> | string | null
     owner_id?: StringFilter<"Store"> | string
@@ -11379,6 +11410,7 @@ export namespace Prisma {
   export type StoreCreateWithoutProductsInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -11390,6 +11422,7 @@ export namespace Prisma {
   export type StoreUncheckedCreateWithoutProductsInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     owner_id: string
@@ -11461,6 +11494,7 @@ export namespace Prisma {
   export type StoreUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11472,6 +11506,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
@@ -11851,6 +11886,7 @@ export namespace Prisma {
   export type StoreCreateWithoutStoreLinksInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -11862,6 +11898,7 @@ export namespace Prisma {
   export type StoreUncheckedCreateWithoutStoreLinksInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     owner_id: string
@@ -11889,6 +11926,7 @@ export namespace Prisma {
   export type StoreUpdateWithoutStoreLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11900,6 +11938,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateWithoutStoreLinksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     owner_id?: StringFieldUpdateOperationsInput | string
@@ -11971,6 +12010,7 @@ export namespace Prisma {
   export type StoreCreateManyOwnerInput = {
     id?: string
     name: string
+    logo?: string | null
     about?: string | null
     store_email?: string | null
     createdAt?: Date | string
@@ -11980,6 +12020,7 @@ export namespace Prisma {
   export type StoreUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11991,6 +12032,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12002,6 +12044,7 @@ export namespace Prisma {
   export type StoreUncheckedUpdateManyWithoutOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     store_email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
